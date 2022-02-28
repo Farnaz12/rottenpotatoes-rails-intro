@@ -1,14 +1,26 @@
 <!--  This file is app/views/movies/index.html.erb -->
-<h2>All Movies</h2>
-
-<%#  Part 1: Start here... %>
+<h2>All Movies</h2> 
+<%= form_tag movies_path, method: :get, id: 'ratings_form' do %>
+  Include:
+  <% @all_ratings.each do |rating| %>
+    <x class="form-check  form-check-inline">
+      <%= label_tag "ratings[#{rating}]", rating, class: 'form-check-label' %>
+      <%= check_box_tag "ratings[#{rating}]", "1",  @rated_movies.include?(rating), class: 'form-check-input' %>
+    </x>
+  <% end %>
+  <%= submit_tag 'Refresh', id: 'ratings_submit', class: 'btn btn-primary' %>
+<% end %>
 
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th>Movie Title</th>
+      <th class =<%="hilite" if @_header == "title_header"%>>
+        <a><%= link_to "Movie Title", movies_path(:_header => "title_header", :ratings => @rated_movies) %></a>
+       </th>
       <th>Rating</th>
-      <th>Release Date</th>
+      <th class =<%="hilite" if @_header == "release_date_header"%>>
+        <%= link_to "Release Date", movies_path(:_header => "release_date_header", :ratings => @rated_movies) %>
+       </th>
       <th>More Info</th>
     </tr>
   </thead>
