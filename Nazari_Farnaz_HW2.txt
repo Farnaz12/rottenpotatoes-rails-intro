@@ -1,0 +1,2 @@
+https://github.com/Farnaz12/rottenpotatoes-rails-intro
+http://fathomless-coast-89725.herokuapp.com/
